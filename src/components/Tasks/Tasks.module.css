@@ -1,0 +1,51 @@
+.task {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-areas:
+    't t b'
+    'p p b';
+    grid-template-columns: 1fr 1fr 130px;
+    border: black 2px solid;
+    border-radius: 10px;
+}
+
+.titleContainer{
+    display: grid;
+    grid-area: t;
+    grid-template-columns: 5fr 1fr;
+    border-bottom: 2px solid black;
+    border-right:  2px solid black;
+
+}
+
+.titleContainer span {
+    padding-top: 20px;
+    padding-left: 10px;
+    text-align: center;
+}
+.titleContainer h2 {
+
+    padding: 20px 10px 10px 10px;
+    border-right:  2px solid black;
+    margin-bottom: 0;
+}
+.textContainer{
+    padding: 10px;
+    height: 90px;
+    grid-area: p;
+    border-right:  2px solid black;
+
+}
+.textContainer p{
+    margin-bottom: 0;
+
+}
+
+
+.buttons{
+    grid-area: b;
+    display: grid;
+    justify-content: right;
+    padding: 5px;
+}
