@@ -1,6 +1,5 @@
 import {FC, useState} from "react";
 import {actions, deleteTask, Dispatch, TaskType, toggleComplete, toggleImportance} from "../../redux/tasksReducer";
-
 import {useDispatch} from "react-redux";
 import styles from "./Tasks.module.css";
 import {Button} from "antd";
@@ -8,9 +7,9 @@ import {ModalForm} from "../Modal/ModalForm";
 
 export const Task: FC<TaskType> = ({title, text, date, isImportant, isComplete, id}) => {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false)
-    const dispatch:Dispatch= useDispatch()
+    const dispatch: Dispatch = useDispatch()
 
-    const taskDelete= (taskId: string) => {
+    const taskDelete = (taskId: string) => {
         dispatch(deleteTask(taskId))
     }
     const importanceToggle = (taskId: string) => {
@@ -24,17 +23,20 @@ export const Task: FC<TaskType> = ({title, text, date, isImportant, isComplete, 
         setIsEditModalOpen(true)
     }
 
-    const handleOk = (data: EditData) => {
+    const handleSubmit = (data: EditData) => {
         dispatch(actions.editTask(data.id, data.title, data.text, data.isImportant))
         setIsEditModalOpen(false)
     }
 
+    const buttonStyle = {
+        marginBottom: '5px',
+        width: '120px'
+    }
 
     return (
         <div className={styles.task}>
             <div className={styles.titleContainer}>
-                    <h2>{title}</h2>
-
+                <h2>{title}</h2>
                 <span>{date}</span>
             </div>
             <div className={styles.textContainer}>
@@ -42,28 +44,29 @@ export const Task: FC<TaskType> = ({title, text, date, isImportant, isComplete, 
             </div>
 
             <div className={styles.buttons}>
-                {isImportant ? <Button type="primary" style={{marginBottom: '5px', width: '120px'}}  onClick={() => {
+                {isImportant ? <Button type="primary" style={buttonStyle} onClick={() => {
                     importanceToggle(id)
-                }}>Important</Button> : < Button style={{marginBottom: '5px', width: '120px'}} onClick={() => {
+                }}>Important</Button> : < Button style={buttonStyle} onClick={() => {
                     importanceToggle(id)
                 }}>Not Important</Button>}
-                {isComplete ? <Button type="primary" style={{marginBottom: '5px', width: '120px'}} onClick={() => {
+                {isComplete ? <Button type="primary" style={buttonStyle} onClick={() => {
                     completeToggle(id)
-                }}>Complete</Button> : <Button style={{marginBottom: '5px', width: '120px'}} onClick={() => {
+                }}>Complete</Button> : <Button style={buttonStyle} onClick={() => {
                     completeToggle(id)
-                }}>Not Complete</Button>}
-                <Button style={{marginBottom: '5px', width: '120px'}} onClick={showModal}> Edit </Button>
-                <Button style={{marginBottom: '5px', width: '120px'}} onClick={() => {
+                }}>Active</Button>}
+                <Button style={buttonStyle} onClick={showModal}> Edit </Button>
+                <Button style={buttonStyle} onClick={() => {
                     taskDelete(id)
                 }}>
                     Delete </Button>
             </div>
-            <ModalForm handleOk={handleOk} isModalOpen={isEditModalOpen} setIsModalOpen={setIsEditModalOpen}
-                       modalTitle={'Edit task: '} titleValue={title}
-                       textValue={text} isImportantValue={isImportant} id={id}/>
+            {isEditModalOpen && <ModalForm handleOk={handleSubmit} setIsModalOpen={setIsEditModalOpen}
+                        modalTitle={'Edit task: '} titleValue={title}
+                        textValue={text} isImportantValue={isImportant} id={id}/>}
         </div>
     )
 }
+
 export type EditData = {
     id: string,
     title: string

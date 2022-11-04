@@ -1,8 +1,19 @@
 import {AppStateType, BaseThunk, InferActionsType} from "./store";
 import {ThunkDispatch} from "redux-thunk";
+import {v1} from "uuid";
 
 let initialState = {
-    tasks: [] as TaskType[]
+    tasks: [
+        {
+            title: 'Some Title',
+            text: 'This is the example task. Create your own!',
+            date: new Date().toLocaleString(),
+            isComplete: false,
+            isImportant: false,
+            id: '1',
+            timestamp: +new Date(),
+        }
+    ]
 }
 
 
@@ -42,11 +53,11 @@ const tasksReducer = (state = initialState, action: Actions): initialStateType =
                 })
             }
         }
-        case "tasks/EDIT_TASK":{
+        case "tasks/EDIT_TASK": {
             return {
                 ...state,
                 tasks: state.tasks.map(t => {
-                    if (t.id === action.payload.taskId){
+                    if (t.id === action.payload.taskId) {
                         t.title = action.payload.title
                         t.text = action.payload.text
                         t.isImportant = action.payload.isImportant
@@ -55,10 +66,10 @@ const tasksReducer = (state = initialState, action: Actions): initialStateType =
                 })
             }
         }
-        case "tasks/SET_INITIAL_STATE":{
+        case "tasks/SET_INITIAL_STATE": {
             return {
                 ...state,
-                tasks: [...state.tasks, ...action.payload]
+                tasks: action.payload
             }
         }
         default:
@@ -80,8 +91,15 @@ export const actions = {
     setInitialState: (tasks: TaskType[]) => ({type: 'tasks/SET_INITIAL_STATE', payload: tasks} as const),
 }
 
-export const addTask = (task: TaskType): Thunk => (dispatch, getState) => {
-    dispatch(actions.addTask(task))
+export const addTask = (task:NewTask): Thunk => (dispatch, getState) => {
+    const newTask = {
+        ...task,
+        date: new Date().toLocaleString(),
+        isComplete: false,
+        id: v1(),
+        timestamp: +new Date(),
+    }
+    dispatch(actions.addTask(newTask))
     localStorage.setItem('tasks', JSON.stringify(getState().task.tasks))
 }
 export const deleteTask = (taskId: string): Thunk => (dispatch, getState) => {
@@ -104,6 +122,11 @@ type initialStateType = typeof initialState
 type Actions = InferActionsType<typeof actions>
 export type Dispatch = ThunkDispatch<AppStateType, any, Actions>
 
+export type NewTask = {
+    title: string
+    text: string
+    isImportant: boolean
+}
 
 export type TaskType = {
     title: string
@@ -112,6 +135,5 @@ export type TaskType = {
     isImportant: boolean
     isComplete: boolean
     id: string
+    timestamp: number
 }
-
-export type ShowFilterType = 'tasks/SHOW_ALL' | 'tasks/SHOW_COMPLETED' | 'tasks/SHOW_ACTIVE' | 'tasks/SHOW_IMPORTANT'

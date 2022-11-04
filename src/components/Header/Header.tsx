@@ -3,7 +3,7 @@ import {Button} from "antd";
 import {ModalForm} from "../Modal/ModalForm";
 import styles from './Header.module.css'
 import {useDispatch} from "react-redux";
-import {addTask, Dispatch, TaskType} from "../../redux/tasksReducer";
+import {addTask, Dispatch, NewTask, TaskType} from "../../redux/tasksReducer";
 import {v1} from "uuid";
 
 export const Header: FC = () => {
@@ -14,10 +14,7 @@ export const Header: FC = () => {
         setIsAddModalOpen(true);
     };
 
-    const handleOk = (data: TaskType) => {
-        data.date = new Date().toLocaleString()
-        data.isComplete = false
-        data.id = v1()
+    const handleSubmit = (data: NewTask) => {
         dispatch(addTask(data))
     };
 
@@ -29,7 +26,7 @@ export const Header: FC = () => {
             <Button type="primary" onClick={showModal}>
                 Add Task
             </Button>
-            <ModalForm isModalOpen={isAddModalOpen} handleOk={handleOk} modalTitle={'Add task: '} setIsModalOpen={setIsAddModalOpen}/>
+            {isAddModalOpen && <ModalForm handleOk={handleSubmit} modalTitle={'Add task: '} setIsModalOpen={setIsAddModalOpen}/>}
         </div>
     )
 }

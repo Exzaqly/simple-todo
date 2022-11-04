@@ -1,7 +1,7 @@
 import {FC} from "react";
 import {Select} from "antd";
-import {ShowFilterType} from "../../redux/tasksReducer";
 import styles from './Sorts.module.css'
+import {ShowFilterType, SortingType} from "../../redux/filterReducer";
 
 
 export const Sorts: FC<Props> = ({sortingHandleChange, showHandleChange}) => {
@@ -12,24 +12,24 @@ export const Sorts: FC<Props> = ({sortingHandleChange, showHandleChange}) => {
 
             <div className={styles.filter}>
                 Show: <Select
-                defaultValue='tasks/SHOW_ALL'
-                style={{width: 120}}
+                defaultValue='SHOW_ALL'
+                style={{width: 160}}
                 onChange={showHandleChange}
                 options={[
                     {
-                        value: 'tasks/SHOW_ALL',
+                        value: 'SHOW_ALL',
                         label: 'All',
                     },
                     {
-                        value: 'tasks/SHOW_COMPLETED',
+                        value: 'SHOW_COMPLETED',
                         label: 'Completed only',
                     },
                     {
-                        value: 'tasks/SHOW_ACTIVE',
+                        value: 'SHOW_ACTIVE',
                         label: 'Active only',
                     },
                     {
-                        value: 'tasks/SHOW_IMPORTANT',
+                        value: 'SHOW_IMPORTANT',
                         label: 'Important only',
                     },
                 ]}
@@ -37,16 +37,16 @@ export const Sorts: FC<Props> = ({sortingHandleChange, showHandleChange}) => {
             </div>
             <div className={styles.sorting}>
                 Sorting : <Select
-                defaultValue="newest"
+                defaultValue='NEWEST'
                 style={{width: 120}}
                 onChange={sortingHandleChange}
                 options={[
                     {
-                        value: 'newest',
+                        value: 'NEWEST',
                         label: 'Newest',
                     },
                     {
-                        value: 'oldest',
+                        value: 'OLDEST',
                         label: 'Oldest',
                     }
                 ]}
@@ -57,6 +57,6 @@ export const Sorts: FC<Props> = ({sortingHandleChange, showHandleChange}) => {
 
 type Props = {
     showHandleChange: (value: ShowFilterType) => void
-    sortingHandleChange: (value: 'oldest' | 'newest') => void
+    sortingHandleChange: (value: SortingType) => void
 }
 

@@ -9,18 +9,12 @@ import "antd/dist/antd.css";
 import {actions, addTask, Dispatch} from "./redux/tasksReducer";
 
 
-const dispatch:Dispatch = store.dispatch
+const dispatch: Dispatch = store.dispatch
 
-    if (localStorage.getItem('tasks') !== "[]") {
-        // @ts-ignore
-        dispatch(actions.setInitialState(JSON.parse(localStorage.getItem('tasks'))))
-    } else {
-        dispatch(addTask({
-            title: 'Some Title', text: 'This is the example task. Create your own!',
-            date: new Date().toLocaleString(), isComplete: false,
-            isImportant: false, id: '1'
-        }))
-    }
+if (localStorage.getItem('tasks') !== "[]") {
+    // @ts-ignore
+    dispatch(actions.setInitialState(JSON.parse(localStorage.getItem('tasks'))))
+}
 
 
 const root = ReactDOM.createRoot(
@@ -28,12 +22,11 @@ const root = ReactDOM.createRoot(
 );
 root.render(
     <React.StrictMode>
-            <Provider store={store}>
-                <App/>
-            </Provider>
+        <Provider store={store}>
+            <App/>
+        </Provider>
     </React.StrictMode>
 );
-
 
 
 // If you want to start measuring performance in your app, pass a function

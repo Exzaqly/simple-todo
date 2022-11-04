@@ -1,10 +1,12 @@
 import {Action, applyMiddleware, combineReducers, createStore} from "redux";
 import thunkMiddleWare, {ThunkAction} from "redux-thunk";
 import tasksReducer from "./tasksReducer";
+import filterReducer from "./filterReducer";
 
 let rootReducer = combineReducers(
     {
         task: tasksReducer,
+        filter: filterReducer,
     }
 )
 
