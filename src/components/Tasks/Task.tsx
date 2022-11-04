@@ -4,6 +4,7 @@ import {useDispatch} from "react-redux";
 import styles from "./Tasks.module.css";
 import {Button} from "antd";
 import {ModalForm} from "../Modal/ModalForm";
+import cn from 'classnames'
 
 export const Task: FC<TaskType> = ({title, text, date, isImportant, isComplete, id}) => {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false)
@@ -34,7 +35,7 @@ export const Task: FC<TaskType> = ({title, text, date, isImportant, isComplete, 
     }
 
     return (
-        <div className={styles.task}>
+        <div className={cn({[styles.complete] : isComplete}, styles.task)}>
             <div className={styles.titleContainer}>
                 <h2>{title}</h2>
                 <span>{date}</span>
