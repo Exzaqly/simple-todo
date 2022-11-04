@@ -2,6 +2,13 @@ import {AppStateType, BaseThunk, InferActionsType} from "./store";
 import {ThunkDispatch} from "redux-thunk";
 import {v1} from "uuid";
 
+const ADD_TASK = 'tasks/ADD_TASK'
+const DELETE_TASK = 'tasks/DELETE_TASK'
+const TOGGLE_IMPORTANCE = 'tasks/TOGGLE_IMPORTANCE'
+const TOGGLE_COMPLETE = 'tasks/TOGGLE_COMPLETE'
+const EDIT_TASK = 'tasks/EDIT_TASK'
+const SET_INITIAL_STATE = 'tasks/SET_INITIAL_STATE'
+
 let initialState = {
     tasks: [
         {
@@ -16,22 +23,21 @@ let initialState = {
     ]
 }
 
-
 const tasksReducer = (state = initialState, action: Actions): initialStateType => {
     switch (action.type) {
-        case "tasks/ADD_TASK": {
+        case ADD_TASK: {
             return {
                 ...state,
                 tasks: [...state.tasks, action.payload]
             }
         }
-        case "tasks/DELETE_TASK": {
+        case DELETE_TASK: {
             return {
                 ...state,
                 tasks: state.tasks.filter(t => t.id !== action.payload.taskId)
             }
         }
-        case "tasks/TOGGLE_IMPORTANCE": {
+        case TOGGLE_IMPORTANCE: {
             return {
                 ...state,
                 tasks: state.tasks.map(t => {
@@ -42,7 +48,7 @@ const tasksReducer = (state = initialState, action: Actions): initialStateType =
                 })
             }
         }
-        case "tasks/TOGGLE_COMPLETE": {
+        case TOGGLE_COMPLETE: {
             return {
                 ...state,
                 tasks: state.tasks.map(t => {
@@ -53,7 +59,7 @@ const tasksReducer = (state = initialState, action: Actions): initialStateType =
                 })
             }
         }
-        case "tasks/EDIT_TASK": {
+        case EDIT_TASK: {
             return {
                 ...state,
                 tasks: state.tasks.map(t => {
@@ -66,7 +72,7 @@ const tasksReducer = (state = initialState, action: Actions): initialStateType =
                 })
             }
         }
-        case "tasks/SET_INITIAL_STATE": {
+        case SET_INITIAL_STATE: {
             return {
                 ...state,
                 tasks: action.payload
@@ -79,16 +85,16 @@ const tasksReducer = (state = initialState, action: Actions): initialStateType =
 
 export const actions = {
     addTask: (task: TaskType) => (
-        {type: 'tasks/ADD_TASK', payload: task} as const
+        {type: ADD_TASK, payload: task} as const
     ),
-    deleteTask: (taskId: string) => ({type: 'tasks/DELETE_TASK', payload: {taskId}} as const),
-    toggleImportance: (taskId: string) => ({type: 'tasks/TOGGLE_IMPORTANCE', payload: {taskId}} as const),
-    toggleComplete: (taskId: string) => ({type: 'tasks/TOGGLE_COMPLETE', payload: {taskId}} as const),
+    deleteTask: (taskId: string) => ({type: DELETE_TASK, payload: {taskId}} as const),
+    toggleImportance: (taskId: string) => ({type: TOGGLE_IMPORTANCE, payload: {taskId}} as const),
+    toggleComplete: (taskId: string) => ({type: TOGGLE_COMPLETE, payload: {taskId}} as const),
     editTask: (taskId: string, title: string, text: string, isImportant: boolean) => ({
-        type: 'tasks/EDIT_TASK',
+        type: EDIT_TASK,
         payload: {taskId, title, text, isImportant}
     } as const),
-    setInitialState: (tasks: TaskType[]) => ({type: 'tasks/SET_INITIAL_STATE', payload: tasks} as const),
+    setInitialState: (tasks: TaskType[]) => ({type: SET_INITIAL_STATE, payload: tasks} as const),
 }
 
 export const addTask = (task:NewTask): Thunk => (dispatch, getState) => {
@@ -114,7 +120,6 @@ export const toggleComplete = (taskId: string): Thunk => (dispatch, getState) =>
     dispatch(actions.toggleComplete(taskId))
     localStorage.setItem('tasks', JSON.stringify(getState().task.tasks))
 }
-
 
 export default tasksReducer
 type Thunk = BaseThunk<Actions, void>

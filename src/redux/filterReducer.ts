@@ -9,7 +9,6 @@ let initialState = {
     sort: 'NEWEST' as SortingType
 }
 
-
 const filterReducer = (state = initialState, action: Actions): initialStateType => {
     switch (action.type) {
         case SET_FILTER_VALUE: {
@@ -40,8 +39,6 @@ export const setFilterValue = (filter: ShowFilterType): Thunk => (dispatch) => {
 export const setSortingValue = (sort: SortingType): Thunk => (dispatch) => {
     dispatch(actions.setSortingValue(sort))
 }
-
-
 
 export default filterReducer
 type Thunk = BaseThunk<Actions, void>

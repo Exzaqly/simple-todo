@@ -3,10 +3,7 @@ import {Select} from "antd";
 import styles from './Sorts.module.css'
 import {ShowFilterType, SortingType} from "../../redux/filterReducer";
 
-
 export const Sorts: FC<Props> = ({sortingHandleChange, showHandleChange}) => {
-
-
     return (
         <div className={styles.container}>
 

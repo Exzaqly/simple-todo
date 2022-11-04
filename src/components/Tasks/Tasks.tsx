@@ -10,11 +10,11 @@ export const Tasks: FC = () => {
     const dispatch: Dispatch = useDispatch()
     const tasks = useSelector(getSuitableTasks)
     const sortingHandleChange = (value: SortingType) => {
-       dispatch (setSortingValue(value))
+        dispatch(setSortingValue(value))
     };
     const filterHandleChange = (value: ShowFilterType) => {
         dispatch(setFilterValue(value))
-}
+    }
 
     return (
         <div>

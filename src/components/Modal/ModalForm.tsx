@@ -3,14 +3,17 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import {TaskType} from "../../redux/tasksReducer";
 import {Modal} from "antd";
 import styles from './ModalForm.module.css'
+
 export const ModalForm: FC<Props> = ({
-                                        handleOk, titleValue,
-                                         modalTitle, isImportantValue,
-                                         textValue, setIsModalOpen, id
+                                         handleOk,
+                                         titleValue,
+                                         modalTitle,
+                                         isImportantValue,
+                                         textValue,
+                                         setIsModalOpen,
+                                         id
                                      }) => {
     const {register, handleSubmit, reset} = useForm<TaskType>()
-
-
 
     const handleCancel = () => {
         setIsModalOpen(false);
@@ -25,7 +28,6 @@ export const ModalForm: FC<Props> = ({
         reset()
     }
 
-
     return (
         <Modal title={modalTitle} open={true} onOk={handleSubmit(handleOkCallback)} onCancel={handleCancel}>
             <form>
@@ -37,10 +39,10 @@ export const ModalForm: FC<Props> = ({
                 <div>
                         <textarea {...register('text', {
                             value: textValue ? textValue : ''
-                        })} placeholder={'task'} className={styles.textarea} />
+                        })} placeholder={'task'} className={styles.textarea}/>
                 </div>
                 <div className={styles.checkbox}>
-                    <label htmlFor={'important'} > Mark as important: </label>
+                    <label htmlFor={'important'}> Mark as important: </label>
                     <input {...register('isImportant', {
                         value: isImportantValue ? isImportantValue : false
                     })} type={"checkbox"} id={'important'}/>
@@ -50,7 +52,6 @@ export const ModalForm: FC<Props> = ({
         </Modal>
     )
 }
-
 
 type Props = {
     handleOk: SubmitHandler<TaskType>
