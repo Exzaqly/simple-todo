@@ -1,9 +1,8 @@
 import {AppStateType} from "./store";
 import {createSelector} from "reselect";
 import {TaskType} from "./tasksReducer";
-import {ShowFilterType, SortingType} from "./filterReducer";
+import {filtering, ShowFilterType, SortingType} from "./filterReducer";
 import {compose} from "redux";
-
 
 export const taskSelector = (state: AppStateType) => state.task.tasks
 export const filterSelector = (state: AppStateType) => state.filter.filter
@@ -22,20 +21,20 @@ export const getSuitableTasks = createSelector(
 
 const getFilteredTasks = ({tasks, filter, ...rest}: { tasks: TaskType[], filter: ShowFilterType }) => {
     switch (filter) {
-        case 'SHOW_ALL': {
+        case filtering.SHOW_ALL: {
             return {tasks, ...rest}
         }
-        case 'SHOW_IMPORTANT': {
+        case filtering.SHOW_IMPORTANT: {
             return {tasks: tasks.filter((t) => t.isImportant), ...rest}
         }
-        case 'SHOW_ACTIVE': {
+        case filtering.SHOW_ACTIVE: {
             return {tasks: tasks.filter((t) => !t.isComplete), ...rest}
         }
-        case 'SHOW_COMPLETED': {
+        case filtering.SHOW_COMPLETED: {
             return {tasks: tasks.filter((t) => t.isComplete), ...rest}
         }
         default: {
-            throw new Error("Unknown filter: " + filter)
+            throw new Error("Unknown filtering: " + filter)
         }
     }
 };

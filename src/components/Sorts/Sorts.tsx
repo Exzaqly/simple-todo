@@ -1,12 +1,11 @@
 import {FC} from "react";
 import {Select} from "antd";
 import styles from './Sorts.module.css'
-import {ShowFilterType, SortingType} from "../../redux/filterReducer";
+import {filtering, ShowFilterType, sortingMethod, SortingType} from "../../redux/filterReducer";
 
 export const Sorts: FC<Props> = ({sortingHandleChange, showHandleChange}) => {
     return (
         <div className={styles.container}>
-
             <div className={styles.filter}>
                 Show: <Select
                 defaultValue='SHOW_ALL'
@@ -14,19 +13,19 @@ export const Sorts: FC<Props> = ({sortingHandleChange, showHandleChange}) => {
                 onChange={showHandleChange}
                 options={[
                     {
-                        value: 'SHOW_ALL',
+                        value: filtering.SHOW_ALL,
                         label: 'All',
                     },
                     {
-                        value: 'SHOW_COMPLETED',
+                        value: filtering.SHOW_COMPLETED,
                         label: 'Completed only',
                     },
                     {
-                        value: 'SHOW_ACTIVE',
+                        value: filtering.SHOW_ACTIVE,
                         label: 'Active only',
                     },
                     {
-                        value: 'SHOW_IMPORTANT',
+                        value: filtering.SHOW_IMPORTANT,
                         label: 'Important only',
                     },
                 ]}
@@ -39,11 +38,11 @@ export const Sorts: FC<Props> = ({sortingHandleChange, showHandleChange}) => {
                 onChange={sortingHandleChange}
                 options={[
                     {
-                        value: 'NEWEST',
+                        value: sortingMethod.NEWEST,
                         label: 'Newest',
                     },
                     {
-                        value: 'OLDEST',
+                        value: sortingMethod.OLDEST,
                         label: 'Oldest',
                     }
                 ]}

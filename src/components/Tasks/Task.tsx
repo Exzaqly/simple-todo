@@ -43,7 +43,6 @@ export const Task: FC<TaskType> = ({title, text, date, isImportant, isComplete, 
             <div className={styles.textContainer}>
                 <p>{text}</p>
             </div>
-
             <div className={styles.buttons}>
                 {isImportant ? <Button type="primary" style={buttonStyle} onClick={() => {
                     importanceToggle(id)

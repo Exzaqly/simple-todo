@@ -46,7 +46,6 @@ export const ModalForm: FC<Props> = ({
                     <input {...register('isImportant', {
                         value: isImportantValue ? isImportantValue : false
                     })} type={"checkbox"} id={'important'}/>
-
                 </div>
             </form>
         </Modal>
