@@ -8,7 +8,7 @@ import {
   SortingType,
 } from '../../redux/filterReducer'
 
-export const Sorts: FC<Props> = ({ sortingHandleChange, showHandleChange }) => {
+export const Sorts: FC<Props> = ({ showFilteredHandler, sortByTimeHandler }) => {
   return (
     <div className={styles.container}>
       <div className={styles.filter}>
@@ -16,7 +16,7 @@ export const Sorts: FC<Props> = ({ sortingHandleChange, showHandleChange }) => {
         <Select
           defaultValue="SHOW_ALL"
           style={{ width: 160 }}
-          onChange={showHandleChange}
+          onChange={sortByTimeHandler}
           options={[
             {
               value: filtering.SHOW_ALL,
@@ -42,7 +42,7 @@ export const Sorts: FC<Props> = ({ sortingHandleChange, showHandleChange }) => {
         <Select
           defaultValue="NEWEST"
           style={{ width: 120 }}
-          onChange={sortingHandleChange}
+          onChange={showFilteredHandler}
           options={[
             {
               value: sortingMethod.NEWEST,
@@ -60,6 +60,6 @@ export const Sorts: FC<Props> = ({ sortingHandleChange, showHandleChange }) => {
 }
 
 type Props = {
-  showHandleChange: (value: ShowFilterType) => void
-  sortingHandleChange: (value: SortingType) => void
+  sortByTimeHandler: (value: ShowFilterType) => void
+  showFilteredHandler: (value: SortingType) => void
 }

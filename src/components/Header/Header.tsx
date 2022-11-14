@@ -13,7 +13,7 @@ export const Header: FC = () => {
     setIsAddModalOpen(true)
   }
 
-  const handleSubmit = (data: NewTask) => {
+  const handleAddTask = (data: NewTask) => {
     dispatch(addTask(data))
   }
 
@@ -24,7 +24,7 @@ export const Header: FC = () => {
       </Button>
       {isAddModalOpen && (
         <ModalForm
-          handleOk={handleSubmit}
+          handleOk={handleAddTask}
           modalTitle={'Add task: '}
           setIsModalOpen={setIsAddModalOpen}
         />

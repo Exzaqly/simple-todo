@@ -15,18 +15,18 @@ import {
 export const Tasks: FC = () => {
   const dispatch: Dispatch = useDispatch()
   const tasks = useSelector(getSuitableTasks)
-  const sortingHandleChange = (value: SortingType) => {
+  const showFilteredHandler = (value: SortingType) => {
     dispatch(setSortingValue(value))
   }
-  const filterHandleChange = (value: ShowFilterType) => {
+  const sortByTimeHandler = (value: ShowFilterType) => {
     dispatch(setFilterValue(value))
   }
 
   return (
     <div>
       <Sorts
-        showHandleChange={filterHandleChange}
-        sortingHandleChange={sortingHandleChange}
+        sortByTimeHandler={sortByTimeHandler}
+        showFilteredHandler={showFilteredHandler}
       />
       <div>
         {tasks.map((t: TaskType) => (
