@@ -1,52 +1,49 @@
 .task {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    display: grid;
-    grid-template-areas:
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-areas:
     't t b'
     'p p b';
-    grid-template-columns: 1fr 1fr 130px;
-    border: black 2px solid;
-    border-radius: 10px;
+  grid-template-columns: 1fr 1fr 130px;
+  border: black 2px solid;
+  border-radius: 10px;
 }
 
 .complete {
-    background-color: #e9e9e9
+  background-color: #e9e9e9;
 }
 
-.titleContainer{
-    display: grid;
-    grid-area: t;
-    grid-template-columns: 5fr 1fr;
-    border-bottom: 2px solid black;
+.titleContainer {
+  display: grid;
+  grid-area: t;
+  grid-template-columns: 5fr 1fr;
+  border-bottom: 2px solid black;
 }
 
 .titleContainer span {
-    padding-top: 20px;
-    padding-left: 10px;
-    text-align: center;
+  padding-top: 20px;
+  padding-left: 10px;
+  text-align: center;
 }
 .titleContainer h2 {
-    padding: 20px 10px 10px 10px;
-    border-right:  2px solid black;
-    margin-bottom: 0;
+  padding: 20px 10px 10px 10px;
+  border-right: 2px solid black;
+  margin-bottom: 0;
 }
-.textContainer{
-    padding: 10px;
-    height: 90px;
-    grid-area: p;
-
+.textContainer {
+  padding: 10px;
+  height: 90px;
+  grid-area: p;
 }
-.textContainer p{
-    margin-bottom: 0;
-
+.textContainer p {
+  margin-bottom: 0;
 }
 
-
-.buttons{
-    grid-area: b;
-    display: grid;
-    justify-content: right;
-    padding: 5px;
-    border-left: 2px black solid;
+.buttons {
+  grid-area: b;
+  display: grid;
+  justify-content: right;
+  padding: 5px;
+  border-left: 2px black solid;
 }
